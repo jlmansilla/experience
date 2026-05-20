@@ -1,5 +1,7 @@
 # Nuxt Minimal Starter
 
+> Deploy test: verificación de despliegue automático desde GitHub (2026-05-20).
+
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
