@@ -251,9 +251,14 @@ const runSimulation = async () => {
           <div class="editor-header" style="background: #09090c; padding: 0.4rem 1rem;">
             <span style="font-size: 0.75rem; color: var(--text-muted);">Console HTTP Payload</span>
           </div>
-          <pre class="code-block" style="color: #6ee7b7; font-size: 0.8rem;"><code v-if="responseJson">{{ JSON.stringify(responseJson, null, 2) }}</code><code v-else-if="packetState === 'sending' || packetState === 'processing'" style="color: var(--accent-cyan); font-style: italic;">Esperando flujo HTTP...</code><code v-else style="color: var(--text-muted); font-style: italic;">Inicia la simulación para inspeccionar la carga JSON devuelta por el servidor.</code></pre>
+                     <pre class="code-block" style="color: #6ee7b7; font-size: 0.8rem;">
+             <code v-if="responseJson">{{ JSON.stringify(responseJson, null, 2) }}</code>
+             <code v-else-if="packetState === 'sending' || packetState === 'processing'" style="color: var(--accent-cyan); font-style: italic;">Esperando flujo HTTP...</code>
+             <code v-else style="color: var(--text-muted); font-style: italic;">Inicia la simulación para inspeccionar la carga JSON devuelta por el servidor.</code>
+           </pre>
         </div>
       </div>
     </div>
   </div>
 </template>
+

@@ -171,6 +171,19 @@ const selectNode = (node: string) => {
 const markCompleted = () => {
   store.completeModule('architecture')
 }
+
+const highlightCode = (code: string): string => {
+  let highlighted = code
+  // Keywords
+  highlighted = highlighted.replace(/(const|let|var|function|export|default|import|from|async|await|return)\b/g, '<span class="keyword">$1</span>')
+  // Strings
+  highlighted = highlighted.replace(/('(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g, '<span class="string">$&</span>')
+  // Comments
+  highlighted = highlighted.replace(/(\/\/.*?)$/gm, '<span class="comment">$1</span>')
+  // HTML tags
+  highlighted = highlighted.replace(/(&lt;\/?[\w]+[^&]*?&gt;)/g, '<span class="tag">$1</span>')
+  return highlighted
+}
 </script>
 
 <template>
@@ -296,12 +309,7 @@ const markCompleted = () => {
             <span class="editor-filename">{{ nodeDetails[activeNode].file }}</span>
           </div>
           
-          <pre class="code-block"><code><span v-html="nodeDetails[activeNode].code
-            .replace(/(const|let|var|function|export|default|import|from|async|await|return)/g, '<span class=\'keyword\'>$1</span>')
-            .replace(/('.*?'|\`.*?\`)/g, '<span class=\'string\'>$1</span>')
-            .replace(/(\/\/.*)/g, '<span class=\'comment\'>$1</span>')
-            .replace(/(&lt;template&gt;|&lt;\/template&gt;|&lt;script.*?&gt;|&lt;\/script&gt;|&lt;div.*?&gt;|&lt;\/div&gt;|&lt;h2.*?&gt;|&lt;\/h2&gt;|&lt;p.*?&gt;|&lt;\/p&gt;|&lt;button.*?&gt;|&lt;\/button&gt;)/g, '<span class=\'tag\'>$1</span>')
-          "></span></code></pre>
+          <pre class="code-block"><code v-html="highlightCode(nodeDetails[activeNode].code)"></code></pre>
         </div>
       </div>
     </div>

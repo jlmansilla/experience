@@ -29,5 +29,27 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap' }
       ]
     }
+  },
+
+  devServer: {
+    host: '127.0.0.1',
+    port: 3000
+  },
+
+  // Vite configuration to prevent watcher locks/EPERM issues on Windows
+  vite: {
+    server: {
+      watch: {
+        usePolling: true,
+        ignored: ['**/*.backup', '**/*.bak-test', '**/debug-ssr.mjs', '**/.output/**']
+      }
+    }
+  },
+
+  // Nitro server inlining configuration to avoid dynamic CommonJS runtime ESM resolution errors in Node
+  nitro: {
+    externals: {
+      inline: ['vue', 'pinia', '@pinia/nuxt']
+    }
   }
 })
